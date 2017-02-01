@@ -2,6 +2,7 @@
 header('Content-Type: application/json');
 
 require 'api/SayHello.php';
+require 'api/GetBase64.php';
 
 $apiMethod = explode('/',$_SERVER['REQUEST_URI']);
 
@@ -15,6 +16,11 @@ switch ($apiMethod[2]){
 
         break;
     case "getBase64":
+
+        $api = new GetBase64($_FILES['data']['tmp_name']);
+
+        echo $api->getResponse();
+        $api->getResponseCode();
 
         break;
     case "sayHelloInLanguage":

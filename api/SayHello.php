@@ -15,20 +15,40 @@ class SayHello
 
     public function getResponse()
     {
-        if( $this->nameLength <= 2 ) {
+        if( (self::isDifferentLetters( $this->name, $this->nameLength)) &&
+            ($this->nameLength <= 2) ){
+
+            $this->httpResponseCode = 500;
+
+            return self::getInformation( 4 );
+
+        }elseif( (self::isDifferentLetters( $this->name, $this->nameLength)) &&
+            ($this->nameLength >= 15) ){
+
+            $this->httpResponseCode = 500;
+
+            return self::getInformation( 5 );
+
+        }elseif( $this->nameLength <= 2 ) {
 
             $this->httpResponseCode = 500;
 
             return self::getInformation( 1 );
+
         } elseif ( $this->nameLength >= 15 ) {
+
             $this->httpResponseCode = 500;
 
             return self::getInformation( 2 );
+
         } elseif ( self::isDifferentLetters( $this->name, $this->nameLength) ) {
+
             $this->httpResponseCode = 500;
 
             return self::getInformation( 3 );
+
         } else{
+
             $this->httpResponseCode = 200;
 
             return self::getInformation( 0, $this->name );
@@ -64,6 +84,22 @@ class SayHello
                     [
                         "status" => "Error",
                         "msg" => "Name is invalid"
+                    ]
+                );
+
+            case 4:
+                return json_encode(
+                    [
+                        "status" => "Error",
+                        "msg" => "Name is too short, Please enter valid name"
+                    ]
+                );
+
+            case 5:
+                return json_encode(
+                    [
+                        "status" => "Error",
+                        "msg" => "Name is too long, Please enter valid name"
                     ]
                 );
 

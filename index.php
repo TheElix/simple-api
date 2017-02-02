@@ -1,5 +1,5 @@
 <?php
-//header('Content-Type: application/json');
+header('Content-Type: application/json');
 
 require 'api/SayHello.php';
 require 'api/GetBase64.php';

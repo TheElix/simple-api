@@ -1,8 +1,9 @@
 <?php
-header('Content-Type: application/json');
+//header('Content-Type: application/json');
 
 require 'api/SayHello.php';
 require 'api/GetBase64.php';
+require 'api/SayHelloInLanguage.php';
 
 $apiMethod = explode('/',$_SERVER['REQUEST_URI']);
 
@@ -24,6 +25,11 @@ switch ($apiMethod[2]){
 
         break;
     case "sayHelloInLanguage":
+
+        $api = new SayHelloInLanguage($_POST['name'], $_POST['language']);
+
+        echo $api->getResponse();
+        $api->getResponseCode();
 
         break;
     default:

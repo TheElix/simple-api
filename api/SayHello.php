@@ -5,6 +5,7 @@ class SayHello
     public $name;
     protected $nameLength;
     protected $httpResponseCode;
+    protected static $msg = 'Hello';
     protected static $errorNumber;
 
     public function __construct( $string )
@@ -107,7 +108,7 @@ class SayHello
                 return json_encode(
                     [
                         "status" => "Success",
-                        "msg" => "Hello " . $name
+                        "msg" => self::$msg . " " . $name
                     ]
                 );
         }
